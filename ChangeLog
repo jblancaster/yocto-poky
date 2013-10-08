@@ -1,0 +1,27 @@
+YYYY-MM-DD  Javi Roman  <javiroman@redoop.org>
+
+    * classes/package_rpm: fix bitbake package-index for RPM
+
+    * http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=2f64fae60b3f61a2c45dc9e5314d2d16b1e64605
+
+    * The function that "bitbake package-index" relies upon when using the RPM
+      package backend (package_update_index_rpm()) uses MULTILIB_PREFIX_LIST
+      to get the list of package architectures to be indexed, but that
+      variable is only set when populate_sdk_rpm or rootfs_rpm are inherited,
+      which is not the case for the package-index recipe. Until we're able to
+      refactor this properly, for minimal impact just use the value of
+      ALL_MULTILIB_PACKAGE_ARCHS if MULTILIB_PREFIX_LIST does not give us any
+      architectures (the equivalent function in the ipk backend uses the
+      former variable).
+
+      Having "bitbake package-index" working is important because it's the
+      only practical way of indexing RPM packages for use as a feed; host
+      versions of createrepo won't work properly because they won't support
+      indexing recommends relationships.
+
+      Stopgap fix for [YOCTO #5278].
+
+      (From OE-Core rev: 9359719c563e1ab0ff10186d1a1b6bde7840dbf3)
+
+      Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
+      Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
