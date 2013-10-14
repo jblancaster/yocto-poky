@@ -776,8 +776,8 @@ python do_package_qa () {
 
     testmatrix = d.getVarFlags("QAPATHTEST")
     import re
-    # The package name matches the [a-z0-9.+-]+ regular expression
-    pkgname_pattern = re.compile("^[a-z0-9.+-]+$")
+    # The package name matches the [A-Za-z0-9.+-]+ regular expression
+    pkgname_pattern = re.compile("^[A-Za-z0-9.+-]+$")
 
     g = globals()
     walk_sane = True
@@ -804,7 +804,7 @@ python do_package_qa () {
         # Check package name
         if not pkgname_pattern.match(package):
             package_qa_handle_error("pkgname",
-                    "%s doesn't match the [a-z0-9.+-]+ regex\n" % package, d)
+                    "%s doesn't match the [A-Za-z0-9.+-]+ regex\n" % package, d)
 
         path = "%s/%s" % (pkgdest, package)
         if not package_qa_walk(path, warnchecks, errorchecks, skip, package, d):

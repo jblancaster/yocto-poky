@@ -1,4 +1,15 @@
-YYYY-MM-DD  Javi Roman  <javiroman@redoop.org>
+2013-10-14  Javi Roman  <javiroman@redoop.org>
+
+    * meta/classes/insane.bbclass: fix warning when there are upper case letters in the BB file name
+
+    * http://patchwork.openembedded.org/patch/56115/
+
+    * Will offer the following warning when there are upper case letters in the BB file name:
+      WARNING: QA Issue: xxx doesn't match the [a-z0-9.+-]+ regex
+
+      Signed-off-by: Yao Xinpan <yaoxp@cn.fujitsu.com>
+
+2013-10-08 Javi Roman  <javiroman@redoop.org>
 
     * classes/package_rpm: fix bitbake package-index for RPM
 
